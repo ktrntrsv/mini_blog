@@ -1,7 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import Table, Column, MetaData, Integer, Computed, String, LargeBinary
 from sqlalchemy.dialects.postgresql import UUID
-from app import db
+from extentions import db
 from flask_login import UserMixin
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID
@@ -29,5 +29,3 @@ class UserDB(UserMixin, db.Model):
 
     def add_new_user(self):
         pass
-
-
