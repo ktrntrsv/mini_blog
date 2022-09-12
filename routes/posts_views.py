@@ -1,4 +1,5 @@
 from flask import render_template, redirect, url_for, session, flash, request
+from flask_login import current_user
 
 
 def post():

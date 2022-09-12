@@ -3,8 +3,8 @@ import dotenv
 from os import getenv
 from flask_bootstrap import Bootstrap
 from flask import Flask
-from extentions import db
-from views import auth, other, posts
+from extentions import db, login_manager
+from routes import auth_views, other_views, posts_views
 
 
 def create_app():
@@ -23,21 +23,22 @@ def create_app():
 
 def register_extensions(app):
     db.init_app(app)
+    login_manager.init_app(app)
 
 
 def add_url_rules(app):
-    app.add_url_rule("/post", view_func=posts.post)
-    app.add_url_rule("/edit_post", view_func=posts.edit_post, methods=("GET", "POST"))
-    app.add_url_rule("/delete_post", view_func=posts.delete_post, methods=("GET", "POST"))
+    app.add_url_rule("/post", view_func=posts_views.post)
+    app.add_url_rule("/edit_post", view_func=posts_views.edit_post, methods=("GET", "POST"))
+    app.add_url_rule("/delete_post", view_func=posts_views.delete_post, methods=("GET", "POST"))
 
-    app.add_url_rule("/sign_in", view_func=auth.sign_in, methods=("GET", "POST"))
-    app.add_url_rule("/sign_up", view_func=auth.sign_up, methods=("GET", "POST"))
-    app.add_url_rule("/log_out", view_func=auth.log_out, )
+    app.add_url_rule("/sign_in", view_func=auth_views.sign_in, methods=("GET", "POST"))
+    app.add_url_rule("/sign_up", view_func=auth_views.sign_up, methods=("GET", "POST"))
+    app.add_url_rule("/log_out", view_func=auth_views.log_out, )
 
-    app.add_url_rule("/", view_func=other.root, )
-    app.add_url_rule("/me", view_func=other.me, methods=("GET", "POST"))
-    app.add_url_rule("/about", view_func=other.about, )
-    app.register_error_handler(404, other.page_not_found, )
+    app.add_url_rule("/", view_func=other_views.root, )
+    app.add_url_rule("/me", view_func=other_views.me, methods=("GET", "POST"))
+    app.add_url_rule("/about", view_func=other_views.about, )
+    app.register_error_handler(404, other_views.page_not_found, )
 
 
 if __name__ == '__main__':

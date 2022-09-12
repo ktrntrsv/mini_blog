@@ -20,14 +20,22 @@
         </ul>
         <span class="navbar-text">
               <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/sign_up">sign up</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/sign_in">sign in<span class="sr-only">(current)</span></a>
-            </li>
+                  {% if current_user.is_anonymous %}
 
-        </ul>
-    </span>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="/sign_up">sign up</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/sign_in">sign in<span class="sr-only">(current)</span></a>
+                      </li>
+                  {% else %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="/log_out">log out<span class="sr-only">(current)</span></a>
+                      </li>
+                  {% endif %}
+
+              </ul>
+        </span>
+
     </div>
 </nav>

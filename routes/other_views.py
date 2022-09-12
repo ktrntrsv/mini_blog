@@ -1,4 +1,5 @@
 from flask import redirect, url_for, render_template, flash
+from flask_login import current_user
 
 
 def root():

@@ -1,23 +1,21 @@
 {% extends "base.html" %}
 
 {% block sub_content %}
-    <div class="jumbotron">
-        <h2>Welcome back!</h2>
-    </div>
 
-    <form>
-        <div class="form-group w-25">
-            <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp"
-                   placeholder="Email">
-        </div>
-        <div class="form-group w-25">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password">
-        </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label><br><br>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="container-narrow">
+        <h3 class="mt-5">Welcome back!</h3>
+        <br/>
+        <form id="SignInForm" method="POST" action="" role="form">
+            {{ form.csrf_token }}
+            <div class="form-group w-25">
+                {{ form.username(placeholder="Username", class_="form-control") }}
+            </div>
+            <div class="form-group w-25">
+                {{ form.password(placeholder="Password", class_="form-control") }}
+            </div>
+            <p><input class="btn btn-primary" type="submit" value="Sing in"></p>
+        </form>
+        <p>Not registered yet? Click <a href={{ url_for("sign_up") }}>here</a> to register.</p>
+    </div>
 
 {% endblock %}
