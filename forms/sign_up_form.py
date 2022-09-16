@@ -27,10 +27,12 @@ class SignUpForm(FlaskForm):
             return False
         user = UserDB.query.filter_by(username=self.username.data).first()
         if user:
-            self.username.errors.append("Username already registered")
+            self.username.errors.append("Username already registered.")
             return False
         user = UserDB.query.filter_by(email=self.email.data).first()
         if user:
-            self.email.errors.append("Email already registered")
+            self.email.errors.append("Email already registered.")
             return False
+        if self.password != self.confirm:
+            self.password.errors.append("Passwords do not match.")
         return True

@@ -1,13 +1,19 @@
 from flask import redirect, url_for, render_template, flash
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 
 def root():
     return redirect(url_for("sign_in"))
 
 
+@login_required
 def me():
-    return render_template("blog/me.html")
+    redirect(f"/user/{current_user.username}")
+
+
+@login_required
+def me_user(username):
+    return render_template("blog/me.html", user=current_user)
 
 
 def about():
@@ -16,6 +22,11 @@ def about():
 
 def page_not_found(error):
     return render_template("404.html")
+
+
+def unauthorized(error):
+    flash("Please, log in.", "info")
+    return redirect(url_for("sign_in"))
 
 
 def is_valid_data(name, age) -> bool:

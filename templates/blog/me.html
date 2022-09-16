@@ -2,6 +2,15 @@
 
 {% block  sub_content %}
     <div class="jumbotron">
-        <h2>Me page</h2>
+        <h3>Me page</h3>
     </div>
+        <table class="table table-hover">
+        <tr>
+            <td width="256px"><img src="{{ user.avatar }}" alt="Avatar" width="120" height="120"></td>
+            <td>
+                <h4>{{ user.username }}</h4>
+            </td>
+        </tr>
+    </table>
+
 {% endblock %}

@@ -1,8 +1,5 @@
-import psycopg2
-import psycopg2.extras
 from werkzeug.urls import url_parse
 
-from forms.sign_in_from import SignInForm
 from flask_login import current_user, login_required, login_user, logout_user
 from forms.sign_in_from import SignInForm
 from forms.sign_up_form import SignUpForm
@@ -31,7 +28,7 @@ def load_user(user_id):
 def sign_in():
     if current_user.is_authenticated:
         logger.info("Redirection for sign_in to me")
-        return redirect(url_for('me'))
+        return redirect(url_for(f'/user/{current_user.username}'))
     logger.info("Signing in")
     form = SignInForm(request.form)
     # current_app.logger.info("Sign in")
@@ -40,12 +37,12 @@ def sign_in():
     if form.validate_on_submit():
         user = UserDB.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid username or password', "warning")
             return redirect(url_for('sign_in'))
         login_user(user)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('me')
+            next_page = f"user/{user.username}"
         return redirect(next_page)
     return render_template('auth/sign_in.html', title='Sign In', form=form)
 
@@ -73,4 +70,4 @@ def sign_up():
 def log_out():
     logger.info("Logging out")
     logout_user()
-    return render_template("auth/sign_in.html")
+    return render_template("about.html")

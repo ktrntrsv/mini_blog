@@ -1,6 +1,9 @@
 from flask import render_template, redirect, url_for, session, flash, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 
+@login_required
+def news():
+    return
 
 def post():
     return render_template("blog/post.html")

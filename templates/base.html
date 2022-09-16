@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-    My flask project
+    Blog cog
 {% endblock %}
 
 {% block navbar %}
@@ -16,7 +16,6 @@
         {% if messages %}
             <ul>
                 {% for category, message in messages %}
-
                     <div  class="alert alert-{{ category }}"> {{ message }}</div>
                 {% endfor %}
             </ul>

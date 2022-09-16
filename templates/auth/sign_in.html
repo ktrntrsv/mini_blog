@@ -5,7 +5,7 @@
     <div class="container-narrow">
         <h3 class="mt-5">Welcome back!</h3>
         <br/>
-        <form id="SignInForm" method="POST" action="" role="form">
+        <form id="SignInForm" method="POST" role="form">
             {{ form.csrf_token }}
             <div class="form-group w-25">
                 {{ form.username(placeholder="Username", class_="form-control") }}
@@ -15,7 +15,7 @@
             </div>
             <p><input class="btn btn-primary" type="submit" value="Sing in"></p>
         </form>
-        <p>Not registered yet? Click <a href={{ url_for("sign_up") }}>here</a> to register.</p>
+        <p>Click <a href={{ url_for("sign_up") }}>here</a> to register.</p>
     </div>
 
 {% endblock %}
