@@ -1,9 +1,10 @@
+from random import randint
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import Table, Column, MetaData, Integer, Computed, String, LargeBinary
 from sqlalchemy.dialects.postgresql import UUID
 from extentions import db
 from flask_login import UserMixin
-import sqlalchemy as sa
 from uuid import uuid1
 from extentions import logger
 
@@ -35,9 +36,9 @@ class UserDB(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.passwd_hash, password)
 
-    def set_icon(self, icon="default"):
+    def set_avatar(self, icon="default"):
         if icon == "default":
-            self.avatar = "/static/avatars/default_avatar.png"
+            self.avatar = f"/static/avatars/default_avatar_{randint(1, 9)}.png"
             logger.info(f"Avatar have set for {self}")
 
     @classmethod
@@ -47,7 +48,7 @@ class UserDB(UserMixin, db.Model):
                    email=email
                    )
         user.set_password_hash(passwd)
-        user.set_icon()
+        user.set_avatar()
         db.session.add(user)
         db.session.commit()
         print(f"Created user {user}")

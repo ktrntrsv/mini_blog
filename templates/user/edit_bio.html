@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block  sub_content %}
+    <div class="jumbotron">
+        <h3>Edit your bio</h3>
+    </div>
+
+    <div class="container-narrow">
+        <br/>
+        <form id="EditBioForm" method="POST" role="form">
+            {{ form.csrf_token }}
+
+            <div class="form-group w-25">
+                {{ form.bio(size=300, maxlength=50, placeholder="BIO", class_="form-control", value=start_bio) }}
+            </div>
+            <p>
+                <input class="btn btn-success" type="submit" value="Save">
+{#                <input class="btn btn-outline-secondary" type="reset" value="Close">#}
+                <a class="btn btn-outline-secondary"  role="button" href={{ url_for("me") }}>Close</a>
+            </p>
+        </form>
+    </div>
+
+
+
+{% endblock %}

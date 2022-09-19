@@ -3,8 +3,6 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
     TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, \
     Length
-from models import user_model
-import email_validator
 
 
 class SignInForm(FlaskForm):

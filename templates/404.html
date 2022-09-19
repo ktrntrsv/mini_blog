@@ -3,10 +3,9 @@
 {% block sub_content %}
     <div class="jumbotron">
         {% set random_num = range(1, 10) | random |string() %}
-        {% set filename = '404/' + random_num + '.png'%}
+        {% set filename = '404/' + random_num + '.png' %}
         <h3><img src={{ url_for('static', filename=filename) }} width="200"
                  height="200"> Oops, this page was not found </h3>
-
     </div>
 
 

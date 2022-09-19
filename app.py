@@ -4,7 +4,7 @@ from os import getenv
 from flask_bootstrap import Bootstrap
 from flask import Flask
 from extentions import db, login_manager
-from routes import auth_views, other_views, posts_views
+from routes import auth_views, other_views, posts_views, error_views, user_views
 
 
 def create_app():
@@ -36,12 +36,13 @@ def add_url_rules(app):
     app.add_url_rule("/log_out", view_func=auth_views.log_out, )
 
     app.add_url_rule("/", view_func=other_views.root, )
-    app.add_url_rule("/me", view_func=other_views.me, )
-    app.add_url_rule("/user/<username>", view_func=other_views.me_user, methods=("GET", "POST"))
+    app.add_url_rule("/me", view_func=user_views.me, methods=("GET", "POST"))
+    app.add_url_rule("/edit_bio", view_func=user_views.edit_bio, methods=("GET", "POST"))
+    app.add_url_rule("/user/<username>", view_func=user_views.me_user, methods=("GET", "POST"))
     app.add_url_rule("/about", view_func=other_views.about, )
     app.add_url_rule("/news", view_func=posts_views.news, )
-    app.register_error_handler(404, other_views.page_not_found, )
-    app.register_error_handler(401, other_views.unauthorized, )
+    app.register_error_handler(404, error_views.page_not_found, )
+    app.register_error_handler(401, error_views.unauthorized, )
 
 
 if __name__ == '__main__':

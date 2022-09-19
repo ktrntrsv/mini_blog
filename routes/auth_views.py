@@ -51,7 +51,6 @@ def sign_up():
     if current_user.is_authenticated:
         logger.info("Redirection for sign_up to me")
         return redirect(url_for('me'))
-    logger.info("Signing up")
     form = SignUpForm(request.form)
     if form.validate_on_submit():
         UserDB.create_user(
