@@ -9,7 +9,7 @@ from uuid import uuid1
 from extentions import logger
 
 
-class UserDB(UserMixin, db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
     id = db.Column(UUID, primary_key=True)
@@ -18,14 +18,16 @@ class UserDB(UserMixin, db.Model):
     passwd_hash = db.Column(String, nullable=False)
     bio = db.Column(String)
     avatar = db.Column(String)
+    posts = db.relationship('Post', backref='author',  lazy='dynamic', primaryjoin="User.id == Post.author_id")
 
-    def __init__(self, id, username, email, passwd_hash=None, bio=None, avatar=None):
-        self.id = id
+    def __init__(self, id_, username, email):
+        self.id = id_
         self.username = username
         self.email = email
-        self.passwd_hash = passwd_hash
-        self.bio = bio
-        self.avatar = avatar
+        self.passwd_hash = None
+        self.bio = None
+        self.avatar = None
+        self.posts = None
 
     def __repr__(self):
         return f'<User {self.username!r}>'
@@ -43,7 +45,7 @@ class UserDB(UserMixin, db.Model):
 
     @classmethod
     def create_user(cls, username: str, email: str, passwd: str):
-        user = cls(id=str(uuid1()),
+        user = cls(id_=str(uuid1()),
                    username=username,
                    email=email
                    )

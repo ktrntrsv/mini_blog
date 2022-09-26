@@ -3,7 +3,7 @@ from werkzeug.urls import url_parse
 from flask_login import current_user, login_required, login_user, logout_user
 from forms.sign_in_from import SignInForm
 from forms.sign_up_form import SignUpForm
-from models.user_model import UserDB
+from models.user_model import User
 from extentions import logger
 from app import login_manager
 from flask import (
@@ -22,7 +22,7 @@ from flask import (
 def load_user(user_id):
     """Load user by ID."""
     logger.info(f"In load_manager")
-    return UserDB.query.get(user_id)
+    return User.query.get(user_id)
 
 
 def sign_in():
@@ -35,7 +35,7 @@ def sign_in():
     # return render_template("auth/sign_in.html", form=form)
 
     if form.validate_on_submit():
-        user = UserDB.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password', "warning")
             return redirect(url_for('sign_in'))
@@ -53,7 +53,7 @@ def sign_up():
         return redirect(url_for('me'))
     form = SignUpForm(request.form)
     if form.validate_on_submit():
-        UserDB.create_user(
+        User.create_user(
             username=form.username.data,
             email=form.email.data,
             passwd=form.password.data

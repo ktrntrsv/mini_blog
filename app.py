@@ -3,7 +3,7 @@ import dotenv
 from os import getenv
 from flask_bootstrap import Bootstrap
 from flask import Flask
-from extentions import db, login_manager
+from extentions import db, login_manager, moment
 from routes import auth_views, other_views, posts_views, error_views, user_views
 
 
@@ -24,6 +24,7 @@ def create_app():
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
+    moment.init_app(app)
 
 
 def add_url_rules(app):

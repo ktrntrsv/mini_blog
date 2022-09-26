@@ -8,7 +8,7 @@ def news():
 
 
 def post():
-    return render_template("blog/post.html")
+    return render_template("blog/_post.html")
 
 
 def edit_post():

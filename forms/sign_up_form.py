@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
     TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, \
     Length
-from models.user_model import UserDB
+from models.user_model import User
 
 
 class SignUpForm(FlaskForm):
@@ -25,11 +25,11 @@ class SignUpForm(FlaskForm):
         print(f"{initial_validation=}")
         if not initial_validation:
             return False
-        user = UserDB.query.filter_by(username=self.username.data).first()
+        user = User.query.filter_by(username=self.username.data).first()
         if user:
             self.username.errors.append("Username already registered.")
             return False
-        user = UserDB.query.filter_by(email=self.email.data).first()
+        user = User.query.filter_by(email=self.email.data).first()
         if user:
             self.email.errors.append("Email already registered.")
             return False

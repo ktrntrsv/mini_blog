@@ -1,29 +1,24 @@
 {% extends "base.html" %}
 
 {% block  sub_content %}
-    <table class="table table-hover">
-        <tr>
-            <td width="256px"><img src="{{ user.avatar }}" alt="Avatar" width="120" height="120"></td>
-            <td>
-                <h4>{{ user.username }}</h4>
-                {% if user.bio %}
-                    {{ user.bio }}
-                {% endif %}
-                <p><small><a href={{ url_for("edit_bio") }}>edit bio</a></small></p>
+<table class="table table-hover">
+    <tr>
+        <td width="256px"><img src="{{ user.avatar }}" alt="Avatar" width="120" height="120"></td>
+        <td>
+            <h4>{{ user.username }}</h4>
+            {% if user.bio %}
+                {{ user.bio }}
+            {% endif %}
+            <p><small><a href={{ url_for("edit_bio") }}>edit bio</a></small></p>
 
-            </td>
+        </td>
 
-        </tr>
-    </table>
-    <a href="/me">
-        <button type="button" class="btn btn-outline-dark">Write a post</button>
-    </a>
-    {% for post in posts %}
-    <table>
-        <tr valign="top">
-            <td><img src="{{ post.author.avatar(36) }}"></td>
-            <td>{{ post.author.username }} says:<br>{{ post.body }}</td>
-        </tr>
-    </table>
-    {% endfor %}
+    </tr>
+</table>
+<a href="/me">
+    <button type="button" class="btn btn-outline-dark">Write a post</button>
+</a>
+{% for post in posts %}
+    {% include 'blog/_post.html' %}
+{% endfor %}
 {% endblock %}

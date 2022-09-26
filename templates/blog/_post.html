@@ -1,0 +1,14 @@
+<table class="table table-hover">
+    <tr>
+        <td width="70px">
+            <a href="{{ url_for('me_user', username=post.author.username) }}">
+                {{ post.author.username }}
+            </a>
+            {{ moment(post.publish_time).fromNow() }}:
+            <br>
+            {{ post.body }}
+        </td>
+    </tr>
+</table>
+
+
