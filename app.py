@@ -28,23 +28,25 @@ def register_extensions(app):
 
 
 def add_url_rules(app):
-    app.add_url_rule("/post", view_func=posts_views.post)
-    app.add_url_rule("/edit_post", view_func=posts_views.edit_post, methods=("GET", "POST"))
-    app.add_url_rule("/delete_post", view_func=posts_views.delete_post, methods=("GET", "POST"))
+    app.add_url_rule("/user/<username>/create_post/", view_func=posts_views.create_post, methods=("GET", "POST"))
+    app.add_url_rule("/edit_post/<pos_id>/", view_func=posts_views.edit_post, methods=("GET", "POST"))
+    app.add_url_rule("/delete_post/<post_id>/", view_func=posts_views.delete_post, methods=("GET", "POST"))
 
-    app.add_url_rule("/sign_in", view_func=auth_views.sign_in, methods=("GET", "POST"))
-    app.add_url_rule("/sign_up", view_func=auth_views.sign_up, methods=("GET", "POST"))
-    app.add_url_rule("/log_out", view_func=auth_views.log_out, )
+    app.add_url_rule("/sign_in/", view_func=auth_views.sign_in, methods=("GET", "POST"))
+    app.add_url_rule("/sign_up/", view_func=auth_views.sign_up, methods=("GET", "POST"))
+    app.add_url_rule("/log_out/", view_func=auth_views.log_out, )
 
     app.add_url_rule("/", view_func=other_views.root, )
-    app.add_url_rule("/me", view_func=user_views.me, methods=("GET", "POST"))
-    app.add_url_rule("/edit_bio", view_func=user_views.edit_bio, methods=("GET", "POST"))
-    app.add_url_rule("/user/<username>", view_func=user_views.me_user, methods=("GET", "POST"))
-    app.add_url_rule("/about", view_func=other_views.about, )
-    app.add_url_rule("/news", view_func=posts_views.news, )
+    app.add_url_rule("/me/", view_func=user_views.me, methods=("GET", "POST"))
+    app.add_url_rule("/user/<username>/edit_bio/", view_func=user_views.edit_bio, methods=("GET", "POST"))
+    app.add_url_rule("/user/<username>", view_func=user_views.user_page, methods=("GET", "POST"))
+    app.add_url_rule("/user/<username>/delete_user/", view_func=user_views.delete_user, methods=("GET", "POST"))
+    app.add_url_rule("/friends/", view_func=user_views.friends, )
+    app.add_url_rule("/about/", view_func=other_views.about, )
+    app.add_url_rule("/news/", view_func=posts_views.news, )
     app.register_error_handler(404, error_views.page_not_found, )
     app.register_error_handler(401, error_views.unauthorized, )
 
 
 if __name__ == '__main__':
-    create_app().run()
+    create_app().run(debug=True)

@@ -10,14 +10,17 @@
         <ul class="navbar-nav mr-auto">
             {% if not current_user.is_anonymous %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="/user/me">me<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href={{ url_for("me", username=current_user.username) }}>me<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/news">news</a>
+                    <a class="nav-link" href={{ url_for("news") }}>news</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ url_for("friends") }}>friends</a>
                 </li>
             {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">about</a>
+                    <a class="nav-link" href={{url_for("about")}}>about</a>
                 </li>
         </ul>
         <span class="navbar-text">
@@ -25,14 +28,14 @@
                   {% if current_user.is_anonymous %}
 
                       <li class="nav-item active">
-                          <a class="nav-link" href="/sign_up">sign up</a>
+                          <a class="nav-link" href={{ url_for("sign_up") }}>sign up</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="/sign_in">sign in<span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href={{ url_for("sign_in") }}>sign in<span class="sr-only">(current)</span></a>
                       </li>
                   {% else %}
                       <li class="nav-item">
-                          <a class="nav-link" href="/log_out">log out<span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href={{ url_for("log_out") }}>log out<span class="sr-only">(current)</span></a>
                       </li>
                   {% endif %}
 

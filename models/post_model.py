@@ -1,9 +1,9 @@
 from datetime import datetime
 
-import sqlalchemy
 from sqlalchemy.dialects.postgresql import UUID
 
-from extentions import db
+from extentions import db, logger
+from models.user_model import User
 
 
 class Post(db.Model):
@@ -14,11 +14,21 @@ class Post(db.Model):
     body = db.Column(db.String(255), nullable=False)
     publish_time = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
-    def __init__(self, post_id, author_id, body, publish_time):
-        self.id = post_id
+    def __init__(self, author_id, body):
         self.author_id = author_id
         self.body = body
-        self.publish_time = publish_time
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+
+    @classmethod
+    def create_post(cls, author_id: User, body: str):
+        post = cls(
+            author_id=author_id,
+            body=body,
+        )
+        db.session.add(post)
+        db.session.commit()
+        logger.info(f"Created post {post.id}")
+        return post
+

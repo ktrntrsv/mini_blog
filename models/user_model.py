@@ -25,9 +25,9 @@ class User(UserMixin, db.Model):
         self.username = username
         self.email = email
         self.passwd_hash = None
-        self.bio = None
+        self.bio = ""
         self.avatar = None
-        self.posts = None
+        self.posts = tuple()
 
     def __repr__(self):
         return f'<User {self.username!r}>'
@@ -40,18 +40,17 @@ class User(UserMixin, db.Model):
 
     def set_avatar(self, icon="default"):
         if icon == "default":
-            self.avatar = f"/static/avatars/default_avatar_{randint(1, 9)}.png"
+            self.avatar = f"/static/avatars/default_avatar_{randint(1, 9)}.jpg"
             logger.info(f"Avatar have set for {self}")
 
     @classmethod
     def create_user(cls, username: str, email: str, passwd: str):
         user = cls(id_=str(uuid1()),
-                   username=username,
+                   username=username.lower(),
                    email=email
                    )
         user.set_password_hash(passwd)
         user.set_avatar()
         db.session.add(user)
         db.session.commit()
-        print(f"Created user {user}")
         return user

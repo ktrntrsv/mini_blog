@@ -6,7 +6,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, \
 
 
 class SignInForm(FlaskForm):
-    username = StringField("Username", validators=(DataRequired(),))
+    username = StringField("Username", validators=(DataRequired(), ))
     password = PasswordField("Password", validators=(DataRequired(),))
     submit = SubmitField("Sign In")
 

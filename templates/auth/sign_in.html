@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block sub_content %}
-
     <div class="container-narrow">
         <h3 class="mt-5">Welcome back!</h3>
         <br/>
@@ -13,9 +12,8 @@
             <div class="form-group w-25">
                 {{ form.password(placeholder="Password", class_="form-control") }}
             </div>
-            <p><input class="btn btn-primary" type="submit" value="Sing in"></p>
+            <p><input class="btn btn-info" type="submit" value="Sing in"></p>
         </form>
         <p>Click <a href={{ url_for("sign_up") }}>here</a> to register.</p>
     </div>
-
 {% endblock %}
