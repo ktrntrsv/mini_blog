@@ -2,24 +2,29 @@
 
 
 {% block  sub_content %}
-    <table class="table">
-        <tr>
-            <td width="256px"><img src="{{ user.avatar }}" alt="Avatar" width="120" height="120"></td>
-            <td width="256px">
-                <h3>{{ user.username }}</h3>
+
+    <div class="container" style="margin-top: 5%">
+        <div class="row">
+            <div class="col-sm col-md-4">
+                <img src="{{ user.avatar }}" alt="Avatar" width="50%"
+                                 style="margin-left: 5%;margin-top: 5%">
+            </div>
+            <div class="col-sm col-md-2">
+                <h3 style="margin-top: 5%">{{ user.username }}</h3>
                 {% if user.bio %}
                     <font color="gray">{{ user.bio }}</font>
                 {% endif %}
                 {% if user == current_user %}
-                    <a href={{ url_for("edit_bio", username=user.username) }}><font color="#a9a9a9" size="1">edit
+                    <a style="margin-top: 5%" href={{ url_for("edit_bio", username=user.username) }}><font
+                            color="#a9a9a9" size="1">edit
                         bio</font></a>
                 {% endif %}
-            </td>
-            <td width="256px">
+            </div>
+            <div class="col-sm col-md-6">
                 {% if create_post_form %}
                     <form id="CreatePostForm" method="POST" role="form">
                         {{ form.csrf_token }}
-                        <div class="form-group w-50">
+                        <div class="form-group">
                             {{ form.post(placeholder="What's up", class_="form-control") }}
                         </div>
                         <p>
@@ -40,9 +45,7 @@
                 {% for post in posts %}
                     {% include 'blog/_post.html' %}
                 {% endfor %}
-            </td>
-
-        </tr>
-    </table>
-
+            </div>
+        </div>
+    </div>
 {% endblock %}

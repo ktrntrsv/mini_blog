@@ -8,12 +8,12 @@
 <table class="table table-hover">
     <tr>
         <td width="70px">
-            <a href="{{ url_for('user_page', username=user.username) }}">
+            <a href="{{ url_for('user_page', username=user.username) }}" style="margin-left: 5%;">
                 <img src="{{ user.avatar }}" alt="Avatar" width="40" height="40">
                 <font color="black" >{{ user.username }}</font>
             </a>
             <br>
-            {{ user.bio }}
+            <a style="margin-left: 50px;"><font color="gray">{{ user.bio }}</font></a>
         </td>
     </tr>
 </table>

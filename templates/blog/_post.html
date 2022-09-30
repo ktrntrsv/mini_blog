@@ -4,21 +4,84 @@
     }
 </style>
 
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-md-2">
+                    <a href="{{ url_for('user_page', username=post.author.username) }}">
+                        <img src="{{ post.author.avatar }}" alt="Avatar" width="40" height="40">
+                        <font size="4" color="black">{{ post.author.username }}</font>
+                    </a>
+                </div>
+                <div class="col-sm-9 col-md-10">
+                    <a>{{ post.body }}</a>
 
-<table class="table table-hover">
-    <tr>
-        <td width="70px">
-            <a href="{{ url_for('user_page', username=post.author.username) }}">
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+{#<table class="table table-hover">#}
+{#    <tr>#}
+{#        <td>#}
+{#            <div class="container">#}
+{#                <div class="row">#}
+{#                    <div class="col-sm-1 col-md-1">#}
+{#                        <a href="{{ url_for('user_page', username=post.author.username) }}">#}
+{#                            <img src="{{ post.author.avatar }}" alt="Avatar" width="40" height="40">#}
+{#                            <br>#}
+{#                            <font size="4" color="black">{{ post.author.username }}</font>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <small>{{ moment(post.publish_time).fromNow() }}</small>#}
+{#                        <br>#}
+{#                        <a>{{ post.body }}</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </td>#}
+{#    </tr>#}
+{#</table>#}
 
-                <img src="{{ post.author.avatar }}" alt="Avatar" width="40" height="40">
-                <font color="black" >{{ post.author.username }}</font>
-            </a>
-
-            <small>{{ moment(post.publish_time).fromNow() }}</small>
-            <br>
-            {{ post.body }}
-        </td>
-    </tr>
-</table>
-
-
+{#<div class="container">#}
+{#    <div class="row">#}
+{#        <div class="col-sm-3 col-md-2">#}
+{#            <a href="{{ url_for('user_page', username=post.author.username) }}">#}
+{#                <img src="{{ post.author.avatar }}" alt="Avatar" width="40" height="40">#}
+{#                <h6><font color="black">{{ post.author.username }}</font></h6>#}
+{#            </a>#}
+{#        </div>#}
+{#        <br>#}
+{#        <div class="col-sm-auto col-md-auto">#}
+{#            <a>{{ post.body }}</a>#}
+{#        </div>#}
+{#        <br>#}
+{#        <div class="col-sm-12 col-md-12">#}
+{#            <hr style="width:50%;text-align:left;margin-left:0">#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{##}
+{#<div class="container">#}
+{#    <div class="row">#}
+{#        <div class="col-sm-3 col-md-2">#}
+{#            <a href="{{ url_for('user_page', username=post.author.username) }}">#}
+{#                <img src="{{ post.author.avatar }}" alt="Avatar" width="40" height="40">#}
+{#                <h6><font color="black">{{ post.author.username }}</font></h6>#}
+{#            </a>#}
+{#        </div>#}
+{#        <br>#}
+{#        <div class="col-sm-auto col-md-auto">#}
+{#            <a>{{ post.body }}</a>#}
+{#        </div>#}
+{#        <br>#}
+{#        <div class="col-sm-12 col-md-12">#}
+{#            <hr style="width:50%;text-align:left;margin-left:0">#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{##}

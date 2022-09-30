@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired, Length
 
 
 class CreatePostForm(FlaskForm):
-    post = TextAreaField('Say something', validators=[DataRequired(), Length(1, 200)])
-    submit = SubmitField('Submit')
+    post = TextAreaField('say something', validators=[DataRequired(), Length(min=1, max=200)])
+    submit = SubmitField('submit')

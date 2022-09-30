@@ -40,7 +40,7 @@ def add_url_rules(app):
     app.add_url_rule("/me/", view_func=user_views.me, methods=("GET", "POST"))
     app.add_url_rule("/user/<username>/edit_bio/", view_func=user_views.edit_bio, methods=("GET", "POST"))
     app.add_url_rule("/user/<username>", view_func=user_views.user_page, methods=("GET", "POST"))
-    app.add_url_rule("/user/<username>/delete_user/", view_func=user_views.delete_user, methods=("GET", "POST"))
+    app.add_url_rule("/user/<username>/delete_user", view_func=user_views.delete_user)
     app.add_url_rule("/friends/", view_func=user_views.friends, )
     app.add_url_rule("/about/", view_func=other_views.about, )
     app.add_url_rule("/news/", view_func=posts_views.news, )

@@ -15,7 +15,7 @@ def me():
 def user_page(username):
     user = User.query.filter_by(username=username).first_or_404()
     posts = user.posts.order_by(Post.publish_time.desc())
-    return render_template("user/me.html", user=user, posts=posts)
+    return render_template("user/user.html", user=user, posts=posts)
 
 
 @login_required
@@ -27,20 +27,22 @@ def edit_bio(username):
     form = EditBioForm(request.form)
     user = current_user
     if form.validate_on_submit():
-        user.bio = form.bio.data
-        db.session.commit()
+        user.update_bio(form.bio.data)
         return redirect(url_for("me"))
     return render_template("user/edit_bio.html", form=form, start_bio=user.bio)
 
 
-@login_required
+# @login_required
 def friends():
     users = User.query.order_by(User.username.desc())
     return render_template("user/friends.html", users=users)
 
+
 @login_required
-def delete_user():
-    user = current_user
-    db.session.delete(user)
-    db.session.commit()
+def delete_user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    if not user == current_user:
+        flash("Permission denied", "warning")
+        return url_for("me")
+    user.delete()
     return url_for("sign_in")

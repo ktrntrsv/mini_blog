@@ -53,9 +53,7 @@ def sign_up():
         )
         flash("Thank you for registering. You can now log in.", "success")
         return redirect(url_for("sign_in"))
-    else:
-        print(f"ERROR {form}")
-    return render_template(url_for("sign_up"), form=form)
+    return render_template("auth/sign_up.html", form=form)
 
 
 def log_out():

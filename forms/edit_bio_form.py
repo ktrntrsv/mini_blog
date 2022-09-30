@@ -6,7 +6,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, \
 
 
 class EditBioForm(FlaskForm):
-    bio = StringField("editBio")
+    bio = StringField("editBio", validators=(DataRequired(), Length(min=1, max=30),))
     save = SubmitField("submit")
 
     def __init__(self, *args, **kwargs):

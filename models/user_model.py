@@ -32,6 +32,16 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<User {self.username!r}>'
 
+    def update_bio(self, bio):
+        self.bio = bio
+        db.session.commit()
+        return
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return
+
     def set_password_hash(self, password):
         self.passwd_hash = generate_password_hash(password)
 

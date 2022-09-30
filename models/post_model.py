@@ -31,4 +31,3 @@ class Post(db.Model):
         db.session.commit()
         logger.info(f"Created post {post.id}")
         return post
-
