@@ -33,7 +33,7 @@ def create_post(username):
 
 
 @login_required
-def edit_post(username):
+def edit_post(post_id):
     return render_template("blog/edit_post.html")
 
 
@@ -45,4 +45,4 @@ def delete_post(post_id):
         return render_template("user/user.html")
     db.session.delete(post)
     db.session.commit()
-    return render_template("user/user.html")
+    return render_template("user/user.html", user=current_user)

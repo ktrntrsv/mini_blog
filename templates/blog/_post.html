@@ -10,13 +10,21 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2">
                     <a href="{{ url_for('user_page', username=post.author.username) }}">
-                        <img src="{{ post.author.avatar }}" alt="Avatar" width="40" height="40">
+                        <img src="{{ post.author.avatar }}" alt="Avatar" width="80%">
                         <font size="4" color="black">{{ post.author.username }}</font>
                     </a>
                 </div>
-                <div class="col-sm-9 col-md-10">
+                <div class="col-sm-9 col-md-7">
                     <a>{{ post.body }}</a>
 
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false" size="5%">...</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href={{ url_for("edit_post", post_id=post.id) }}>Edit</a>
+                        <a class="dropdown-item" href={{ url_for("delete_post", post_id=post.id) }}>Delete</a>
+                    </div>
                 </div>
             </div>
         </div>

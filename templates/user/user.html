@@ -3,11 +3,11 @@
 
 {% block  sub_content %}
 
-    <div class="container" style="margin-top: 5%">
+    <div class="container user_subcontent" style="margin-top: 5%;margin-right: 5%">
         <div class="row">
             <div class="col-sm col-md-4">
-                <img src="{{ user.avatar }}" alt="Avatar" width="50%"
-                                 style="margin-left: 5%;margin-top: 5%">
+                <img src="{{ user.avatar }}" alt="Avatar" width="55%"
+                     style="margin-left: 5%;margin-top: 5%">
             </div>
             <div class="col-sm col-md-2">
                 <h3 style="margin-top: 5%">{{ user.username }}</h3>
@@ -21,31 +21,28 @@
                 {% endif %}
             </div>
             <div class="col-sm col-md-6">
-                {% if create_post_form %}
-                    <form id="CreatePostForm" method="POST" role="form">
-                        {{ form.csrf_token }}
-                        <div class="form-group">
-                            {{ form.post(placeholder="What's up", class_="form-control") }}
-                        </div>
-                        <p>
-                            <input class="btn btn-info" type="submit" value="Post">
-                            <a class="btn btn-outline-secondary" role="button" href={{ url_for("me") }}>Close</a>
-                        </p>
+                <form id="CreatePostForm" method="POST" role="form" style="display:none;">
+                    {{ form.csrf_token }}
+                    <div class="form-group">
+                        {{ form.post(placeholder="What's up", class_="form-control") }}
+                    </div>
+                    <p>
+                       <input type="hidden" name="username" value="{{ user.username}}">
+                        <input class="btn btn-info" type="submit" value="Post">
+                        <button id="hidePostForm" class="btn btn-outline-secondary" role="button">Close</button>
+                    </p>
 
-                    </form>
-                {% else %}
-                    {% if user == current_user %}
-                        <a href={{ url_for("create_post", username=user.username) }}>
-                            <button type="button" class="btn btn-outline-info">Write a post</button>
-                        </a>
-                    {% endif %}
+                </form>
+                {% if user == current_user %}
+                    <button id="showCreatePostForm" type="button" class="btn btn-outline-info">Write a post</button>
                 {% endif %}
-
-                <p></p>
+                <br>
+                <br>
                 {% for post in posts %}
                     {% include 'blog/_post.html' %}
                 {% endfor %}
             </div>
         </div>
     </div>
+    <script src="/static/addPost.js"></script>
 {% endblock %}

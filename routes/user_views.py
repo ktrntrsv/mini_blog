@@ -2,6 +2,7 @@ from flask_login import current_user, login_required
 from flask import redirect, url_for, render_template, flash, request
 from forms.edit_bio_form import EditBioForm
 from extentions import logger, db
+from forms.post_form import CreatePostForm
 from models.post_model import Post
 from models.user_model import User
 
@@ -14,8 +15,18 @@ def me():
 @login_required
 def user_page(username):
     user = User.query.filter_by(username=username).first_or_404()
+    # posts = user.posts.order_by(Post.publish_time.desc())
+    form = CreatePostForm(request.form)
+    user = current_user
+    if form.validate_on_submit():
+        Post.create_post(
+            author_id=user.id,
+            body=form.post.data
+        )
+        flash("Post created.", "success")
+        return redirect(url_for("me"))
     posts = user.posts.order_by(Post.publish_time.desc())
-    return render_template("user/user.html", user=user, posts=posts)
+    return render_template("user/user.html", user=user, posts=posts, form=form)
 
 
 @login_required

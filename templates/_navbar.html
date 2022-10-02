@@ -1,27 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
     <a class="navbar-brand" href="/">
-        <img src="/static/cog.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        Blog cog</a>
+        <img src="/static/cog.png" width="70" height="70" class="d-inline-block align-top" alt="">
+    </a>
+    <a><font size="6">Blog cog</font></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             {% if not current_user.is_anonymous %}
                 <li class="nav-item active">
-                    <a class="nav-link" href={{ url_for("me", username=current_user.username) }}>me<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href={{ url_for("me", username=current_user.username) }}>
+                        <font size="4">me</font>
+                        <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ url_for("news") }}>news</a>
+                    <a class="nav-link" href={{ url_for("news") }}>
+                        <font size="4">news</font>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ url_for("friends") }}>friends</a>
+                    <a class="nav-link" href={{ url_for("friends") }}>
+                        <font size="4">friends</font>
+                    </a>
                 </li>
             {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href={{url_for("about")}}>about</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for("about") }}>
+                    <font size="4">about</font>
+                </a>
+            </li>
         </ul>
         <span class="navbar-text">
               <ul class="navbar-nav mr-auto">
@@ -31,11 +41,13 @@
                           <a class="nav-link" href={{ url_for("sign_up") }}>sign up</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href={{ url_for("sign_in") }}>sign in<span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href={{ url_for("sign_in") }}>sign in<span
+                                  class="sr-only">(current)</span></a>
                       </li>
                   {% else %}
                       <li class="nav-item">
-                          <a class="nav-link" href={{ url_for("log_out") }}>log out<span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href={{ url_for("log_out") }}>log out<span
+                                  class="sr-only">(current)</span></a>
                       </li>
                   {% endif %}
 
