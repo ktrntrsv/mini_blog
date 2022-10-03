@@ -15,18 +15,18 @@ def me():
 @login_required
 def user_page(username):
     user = User.query.filter_by(username=username).first_or_404()
-    # posts = user.posts.order_by(Post.publish_time.desc())
-    form = CreatePostForm(request.form)
-    user = current_user
-    if form.validate_on_submit():
+    logger.info("In user page")
+    create_post_form = CreatePostForm(request.form)
+    if create_post_form.validate_on_submit() and user == current_user:
+        logger.info("Creating post")
         Post.create_post(
             author_id=user.id,
-            body=form.post.data
+            body=create_post_form.post.data
         )
         flash("Post created.", "success")
         return redirect(url_for("me"))
     posts = user.posts.order_by(Post.publish_time.desc())
-    return render_template("user/user.html", user=user, posts=posts, form=form)
+    return render_template("user/user.html", user=user, posts=posts, form=create_post_form)
 
 
 @login_required

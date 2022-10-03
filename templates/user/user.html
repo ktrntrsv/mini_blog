@@ -27,8 +27,8 @@
                         {{ form.post(placeholder="What's up", class_="form-control") }}
                     </div>
                     <p>
-                       <input type="hidden" name="username" value="{{ user.username}}">
-                        <input class="btn btn-info" type="submit" value="Post">
+                        <input type="hidden" name="username" value="{{ user.username }}">
+                        <input class="btn btn-info" name="post" type="submit" value="Post">
                         <button id="hidePostForm" class="btn btn-outline-secondary" role="button">Close</button>
                     </p>
 
